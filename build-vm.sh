@@ -9,9 +9,9 @@ DIST="ubuntu"
 
 VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 --mem 300 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
---seedfile $DIR/seedfile --firstboot $DIR/firstboot.sh --firstlogin $DIR/firstlogin.sh \
---ppa yubico/stable --addpkg unattended-upgrades --addpkg ubuntu-desktop \
---addpkg yubi-x"
+--seedfile $DIR/seedfile --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
+--firstlogin $DIR/firstlogin.sh \
+--ppa yubico/stable --addpkg unattended-upgrades --addpkg yubi-x"
 
 vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS
 
