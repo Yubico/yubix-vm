@@ -13,7 +13,7 @@ VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 --firstlogin $DIR/firstlogin.sh \
 --ppa yubico/stable --addpkg unattended-upgrades --addpkg yubi-x"
 
-vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS
+vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS $@
 
 if [ $HYPERVISOR == "vmw6" ]; then
 	#Fix path of the virtual hdd.
