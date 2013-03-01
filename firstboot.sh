@@ -2,6 +2,18 @@
 
 set -e
 
+# Wait for MySQL to start
+mysqlWaitFlag=1
+while [ "${mysqlWaitFlag}" != "0" ]
+do
+	echo "Waiting for MySQL to start"
+	sleep 5 > /dev/null
+	mysqladmin ping -ufakeuser 2> /dev/null
+	if [ "${?}" = "0" ]; then
+		mysqlWaitFlag=0
+	fi
+done
+
 # Set random mysql password
 ROOT_PASS=$(pwgen -s 16 1)
 mysqladmin -u root password $ROOT_PASS
@@ -17,7 +29,6 @@ do
 done
 
 # Create users and tables for ksm and val
-for LINE in \
 echo "yubikey-ksm yubikey-ksm/dbconfig-reinstall boolean true" \
 	| debconf-set-selections
 echo "yubikey-ksm yubikey-ksm/mysql/admin-pass password $ROOT_PASS" \

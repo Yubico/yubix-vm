@@ -10,7 +10,6 @@ DIST="ubuntu"
 VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 --mem 300 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
 --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
---firstlogin $DIR/firstlogin.sh \
 --ppa yubico/stable --addpkg unattended-upgrades --addpkg yubi-x \
 --addpkg pwgen"
 
