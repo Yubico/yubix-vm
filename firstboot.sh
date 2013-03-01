@@ -3,14 +3,14 @@
 set -e
 
 # Set random mysql password
-ROOT_PASS=$(pwgen -1 16)
+ROOT_PASS=$(pwgen -s 16 1)
 mysqladmin -u root password $ROOT_PASS
 
 # Randomize passwords for ykval and ykksm
 for PACKAGE in yubikey-ksm yubikey-val
 do
-	PASS=$(pwgen -1 16)
-	sed "s/^dbc_dbpass='.\{1,\}'$/dbc_dbpass='$PASS'/g" \
+	PASS=$(pwgen -s 16 1)
+	sed -i "s/^dbc_dbpass='.\{1,\}'$/dbc_dbpass='$PASS'/g" \
 		/etc/dbconfig-common/$PACKAGE.conf
 done
 
