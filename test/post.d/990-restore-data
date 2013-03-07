@@ -8,5 +8,6 @@ mysql ykksm < data-backup/ykksm.sql
 mysql ykval < data-backup/ykval.sql
 
 cp data-backup/users /etc/freeradius/users
+cp data-backup/ykrlm-config.cfg /etc/yubico/rlm/ykrlm-config.cfg 
 
 rm data-backup -R

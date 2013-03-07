@@ -17,3 +17,4 @@ if ! mysqldump ykval > data-backup/ykval.sql; then
 fi
 
 cp /etc/freeradius/users data-backup/users
+cp /etc/yubico/rlm/ykrlm-config.cfg data-backup/ykrlm-config.cfg
