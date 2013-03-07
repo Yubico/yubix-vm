@@ -11,7 +11,7 @@ VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 --mem 512 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
 --copy $DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
 --ppa yubico/stable --addpkg unattended-upgrades --addpkg acpid \
---addpkg yubi-x --addpkg pwgen"
+--addpkg yubi-x --addpkg pwgen --addpkg ssh"
 
 vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS $@
 
