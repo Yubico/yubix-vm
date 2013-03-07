@@ -2,6 +2,13 @@
 
 set -e
 
+if [ "${HOME}" != "/root" ]; then
+	echo "Tests must be run as the root user!"
+	exit 1
+fi
+
+cd "$(dirname "$0")"
+
 echo "===================="
 echo "RUNNING YUBI-X TESTS"
 echo "===================="
