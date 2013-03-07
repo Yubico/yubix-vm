@@ -1,12 +1,11 @@
 #!/usr/bin/perl -w
 
-#use strict;
+use strict;
 use warnings;
 
-use Test::More tests => 8;
+use Test::More tests => 12;
 use Test::Exception;
 
-#Auto-provision:
 like(`radtest user1 pass1cccccccccccbtjhlvlgnjbetljghhldtjnetitcefbvt 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'provision OTP');
 
@@ -30,3 +29,23 @@ like(`radtest user1 pass1cccccccccccbutfiljtbignggckhgdtfigbdricugddd 127.0.0.1 
 
 like(`radtest user1 pass1 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'do not require OTP');
+
+#Disable auto provisioning
+`echo "\\\$allow_auto_provisioning = 0;" >> /etc/yubico/rlm/ykrlm-config.cfg`;
+`service freeradius restart`;
+
+like(`radtest user2 pass2 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'no OTP provisioned');
+
+like(`radtest user2cccccccccccdevhrjfhjvivcldffttudhngrctjhlhuf pass2 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Reject/, 'unprovisioned OTP');
+
+#Manually provision:
+`echo "user2:cccccccccccd" >> /etc/yubico/rlm/ykmapping`;
+
+like(`radtest user2cccccccccccdfhgrbtkeurfgjuiingirikvncejnktit pass2 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'manually provisioned OTP');
+
+like(`radtest cccccccccccdlvigeledtrhnjfdibigjfcnhbilrfheb pass2 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'userless login');
+

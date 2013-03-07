@@ -1,13 +1,16 @@
 #!/usr/bin/perl -w
 
-#use strict;
+use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 use Test::Exception;
+
+like(`radtest user1 pass1 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'user1 pass1');
 
 like(`radtest user2 pass2 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'user2 pass2');
 
 like(`radtest user2 pass3 127.0.0.1 0 testing123`,
-	qr/rad_recv: Access-Reject/, 'user2 pass3');
+	qr/rad_recv: Access-Reject/, 'user2 incorrect pass');

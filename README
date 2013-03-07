@@ -12,3 +12,7 @@ Ubuntu installation with the python-vm-builder package installed.
 
 To create the virtual machine image, run build-vm.sh as root.
 
+## Testing ##
+
+To run the tests, run the /root/test/run-tests.sh script as the root user 
+on the virtual machine.
