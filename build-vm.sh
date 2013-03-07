@@ -8,8 +8,8 @@ HYPERVISOR="vmw6"
 DIST="ubuntu"
 
 VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
---mem 300 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
---exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
+--mem 512 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
+--copy $DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
 --ppa yubico/stable --addpkg unattended-upgrades --addpkg acpid \
 --addpkg yubi-x --addpkg pwgen"
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+mysql ykksm < test-data/ykksm.sql
+mysql ykval < test-data/ykval.sql
+
+cp test-data/users /etc/freeradius/users

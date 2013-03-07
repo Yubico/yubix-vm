@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Restore the data that was backed up in 010-backup-data.
+
+set -e
+
+mysql ykksm < data-backup/ykksm.sql
+mysql ykval < data-backup/ykval.sql
+
+cp data-backup/users /etc/freeradius/users
+
+rm data-backup -R

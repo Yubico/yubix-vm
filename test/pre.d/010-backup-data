@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Backup existing data. Everything backed up here should be restored
+# in 990-restore-data.
+set -e
+
+mkdir data-backup
+
+if ! mysqldump ykksm > data-backup/ykksm.sql; then
+	rm data-backup -Rf
+	exit 1
+fi
+
+if ! mysqldump ykval > data-backup/ykval.sql; then
+	rm data-backup -Rf
+	exit 1
+fi
+
+cp /etc/freeradius/users data-backup/users
