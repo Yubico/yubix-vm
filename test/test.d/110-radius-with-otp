@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 12;
+use Test::More tests => 13;
 use Test::Exception;
 
 like(`radtest user1 pass1cccccccccccbtjhlvlgnjbetljghhldtjnetitcefbvt 127.0.0.1 0 testing123`,
@@ -49,3 +49,9 @@ like(`radtest user2cccccccccccdfhgrbtkeurfgjuiingirikvncejnktit pass2 127.0.0.1 
 like(`radtest cccccccccccdlvigeledtrhnjfdibigjfcnhbilrfheb pass2 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'userless login');
 
+#Disable userless login:
+`echo "\\\$allow_userless_login = 0;" >> /etc/yubico/rlm/ykrlm-config.cfg`;
+`service freeradius restart`;
+
+like(`radtest cccccccccccdiufijhvbfnlclvbtrjlduegcujfdikuf pass2 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Reject/, 'disallowed userless login');
