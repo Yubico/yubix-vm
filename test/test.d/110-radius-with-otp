@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+
+#use strict;
+use warnings;
+
+use Test::More tests => 8;
+use Test::Exception;
+
+#Auto-provision:
+like(`radtest user1 pass1cccccccccccbtjhlvlgnjbetljghhldtjnetitcefbvt 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'provision OTP');
+
+like(`radtest user1 pass1cccccccccccbtdlvnjrirlvurifltccivrjfeeiigrhl 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'append OTP to password');
+
+like(`radtest user1cccccccccccbvevcrklddjnbjhclhhdbngihiicvvlbi pass1 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'append OTP to username');
+
+like(`radtest user1cccccccccccbvevcrklddjnbjhclhhdbngihiicvvlbi pass1 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Reject/, 'replay OTP to username');
+
+like(`radtest user1 pass1cccccccccccbvevcrklddjnbjhclhhdbngihiicvvlbi 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Reject/, 'replay OTP to password');
+
+like(`radtest user1 pass1cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Reject/, 'valid unknown OTP');
+
+like(`radtest user1 pass1cccccccccccbutfiljtbignggckhgdtfigbdricugddd 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Reject/, 'invalid OTP');
+
+like(`radtest user1 pass1 127.0.0.1 0 testing123`,
+	qr/rad_recv: Access-Accept/, 'do not require OTP');
