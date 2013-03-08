@@ -53,7 +53,7 @@ vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS "$@"
 
 if [ $HYPERVISOR == "vmw6" ]; then
 	#Fix path of the virtual hdd.
-	sed -i 's,[^"]*$DEST/,,g' $DEST/yubi-x.vmx
+	sed -i 's,\(ide0:0\.fileName.*"\)[^"]*/\(.*"\),\1\2,g' $DEST/yubi-x.vmx
 fi
 
 echo "Completed successfully, result is in: $DEST"
