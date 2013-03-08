@@ -1,7 +1,7 @@
-Yubi-X VM
+YubiX VM
 =========
 
-Creates a virtual machine with Yubi-X installed, ready for distribution.
+Creates a virtual machine with YubiX installed, ready for distribution.
 
 ## Dependencies ##
 

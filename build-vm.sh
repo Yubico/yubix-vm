@@ -43,17 +43,17 @@ if [ "x$1" == "x-d" ] || [ "x$1" == "x--dest" ]; then
 fi
 
 VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
---mem 512 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
+--mem 512 --tmpfs - --hostname yubix --user yubikey --pass yubico \
 --copy $DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
 --dest $DEST --verbose --ppa yubico/stable \
---addpkg unattended-upgrades --addpkg acpid --addpkg yubi-x \
+--addpkg unattended-upgrades --addpkg acpid --addpkg yubix \
 --addpkg pwgen --addpkg ssh"
 
 vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS "$@"
 
 if [ $HYPERVISOR == "vmw6" ]; then
 	#Fix path of the virtual hdd.
-	sed -i 's,\(ide0:0\.fileName.*"\)[^"]*/\(.*"\),\1\2,g' $DEST/yubi-x.vmx
+	sed -i 's,\(ide0:0\.fileName.*"\)[^"]*/\(.*"\),\1\2,g' $DEST/yubix.vmx
 fi
 
 echo "Completed successfully, result is in: $DEST"
