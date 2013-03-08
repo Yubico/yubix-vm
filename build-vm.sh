@@ -8,6 +8,13 @@ HYPERVISOR="vmw6"
 DIST="ubuntu"
 DEST="output"
 
+#Allow overriding dest
+if [ "x$1" == "x-d" ] || [ "x$1" == "x--dest" ]; then
+	shift
+	DEST=$1
+	shift
+fi
+
 VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 --mem 512 --tmpfs - --hostname yubi-x --user yubikey --pass yubico \
 --copy $DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
@@ -22,4 +29,4 @@ if [ $HYPERVISOR == "vmw6" ]; then
 	sed -i s,$DIR/$DEST/,,g $DEST/yubi-x.vmx
 fi
 
-echo "Completed successfully!"
+echo "Completed successfully, result is in: $DEST"
