@@ -36,4 +36,4 @@ chroot $1 sed -i 's/^#*PasswordAuthentication .*$/PasswordAuthentication no/g' \
 	/etc/ssh/sshd_config
 
 # Remove SSH host keys.
-chroot $1 rm /etc/ssh/ssh_host_*
+chroot $1 rm -f /etc/ssh/ssh_host_*

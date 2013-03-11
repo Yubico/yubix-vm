@@ -30,7 +30,8 @@
 set -e
 
 # Regenerate SSH host keys.
-dpkg-reconfigure openssh-server
+rm -f /etc/ssh/ssh_host*
+dpkg-reconfigure -fnoninteractive -pcritical openssh-server
 
 # Wait for MySQL to start
 mysqlWaitFlag=1
