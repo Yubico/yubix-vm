@@ -51,9 +51,4 @@ VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 
 vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS "$@"
 
-if [ $HYPERVISOR == "vmw6" ]; then
-	#Fix path of the virtual hdd.
-	sed -i 's,\(ide0:0\.fileName.*"\)[^"]*/\(.*"\),\1\2,g' $DEST/yubix.vmx
-fi
-
 echo "Completed successfully, result is in: $DEST"

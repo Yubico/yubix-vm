@@ -27,5 +27,5 @@ floppy0.present = "FALSE"
     #set $bus = $i / 2
     #set $id = $i % 2
 ide${bus}:${id}.present = "TRUE"
-ide${bus}:${id}.fileName = "${disk.filename}"
+ide${bus}:${id}.fileName = "${disk.filename[$disk.filename.rfind('/')+1:]}"
 #end for
