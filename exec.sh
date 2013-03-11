@@ -34,3 +34,6 @@ chroot $1 apt-get update
 # Disable SSH Password Authentication.
 sed -i 's/^#*PasswordAuthentication .*$/PasswordAuthentication no/g' \
 	/etc/ssh/sshd_config
+
+# Remove SSH host keys.
+rm /etc/ssh/ssh_host_*

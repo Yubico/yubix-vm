@@ -29,6 +29,9 @@
 
 set -e
 
+# Regenerate SSH host keys.
+dpkg-reconfigure openssh-server
+
 # Wait for MySQL to start
 mysqlWaitFlag=1
 while [ "${mysqlWaitFlag}" != "0" ]
