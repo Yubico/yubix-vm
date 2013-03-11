@@ -1,0 +1,31 @@
+config.version = "8"
+virtualHW.version = "$vmhwversion"
+scsi0.present = "FALSE"
+scsi0.virtualDev = "lsilogic"
+memsize = "$mem"
+numvcpus = "$numvcpus"
+Ethernet0.virtualDev = "vlance"
+Ethernet0.present = "TRUE"
+Ethernet0.connectionType = "bridged"
+#if $mac
+Ethernet0.addressType = "static"
+Ethernet0.address = "$mac"
+#end if
+displayName = "$hostname $arch"
+guestOS = "$guestos"
+priority.grabbed = "normal"
+priority.ungrabbed = "normal"
+powerType.powerOff = "hard"
+powerType.powerOn = "hard"
+powerType.suspend = "hard"
+powerType.reset = "hard"
+usb.present = "TRUE"
+floppy0.present = "FALSE"
+#set $i = -1
+#for $disk in $disks
+    #set $i = $i + 1
+    #set $bus = $i / 2
+    #set $id = $i % 2
+ide${bus}:${id}.present = "TRUE"
+ide${bus}:${id}.fileName = "${disk.filename}"
+#end for
