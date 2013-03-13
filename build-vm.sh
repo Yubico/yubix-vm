@@ -46,8 +46,9 @@ VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
 --mem 512 --tmpfs - --hostname yubix --user yubikey --pass yubico \
 --copy $DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
 --dest $DEST --templates $DIR/templates --verbose --ppa yubico/stable \
---addpkg unattended-upgrades --addpkg acpid --addpkg yubix \
---addpkg pwgen --addpkg ssh --addpkg bash-completion"
+--addpkg linux-image-extra-virtual --addpkg unattended-upgrades \
+--addpkg acpid --addpkg yubix --addpkg pwgen --addpkg ssh \
+--addpkg bash-completion"
 
 vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS "$@"
 
