@@ -27,6 +27,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#
+# This script is run as the final step in the VM build process.
+# Put stuff that needs to be run before distributing the VM image here.
+#
+
 # Add the Yubico PPA key, since vmbuilder does not automatically do this.
 chroot $1 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 32CBA1A9
 chroot $1 apt-get update

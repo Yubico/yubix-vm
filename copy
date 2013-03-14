@@ -1,1 +1,2 @@
+# Files to be copied into the VM
 test/ /root/

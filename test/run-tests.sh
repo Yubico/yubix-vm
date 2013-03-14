@@ -36,9 +36,11 @@ fi
 
 cd "$(dirname "$0")"
 
-echo "===================="
+echo "================================"
 echo "RUNNING YUBI-X TESTS"
-echo "===================="
+echo "`date`"
+echo "Thu Mar 14 13:43:36 CET 2013"
+echo "================================"
 
 pre=$(find pre.d -mindepth 1 -maxdepth 1 -type f -executable \
 	-name '[0-9]*' | sort)
@@ -54,15 +56,15 @@ for task in $pre; do
 done
 
 FAILED=""
-#for test in `ls tests|grep -e "^[0-9]\{3\}-"`;do
 for test in $tests; do
 	echo "* Running test: $test"
-	if "$test"; then
+	if `$test`; then
 		echo "* Completed successfully!"
 	else
 		FAILED="true"
 		echo "================================"
 		echo "FAILURE: $test FAILED!"
+		echo "`date`"
 		echo "================================"
 	fi
 done
@@ -77,10 +79,12 @@ done
 if [ "$FAILED" == "true" ]; then
 	echo "================================"
 	echo "WARNING: THERE WERE FAILED TESTS"
+	echo "`date`"
 	echo "================================"
 	exit 1
 else
 	echo "================================"
 	echo "ALL TESTS COMPLETED SUCCESSFULLY"
+	echo "`date`"
 	echo "================================"
 fi

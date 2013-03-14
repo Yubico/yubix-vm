@@ -27,6 +27,12 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#
+# This script is run the first time the VM is started (generally by the
+# user). Put initialization that needs to run after distribution here,
+# such as generating host keys and passwords, etc.
+#
+
 set -e
 
 # Regenerate SSH host keys.
