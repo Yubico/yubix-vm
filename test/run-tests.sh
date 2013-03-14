@@ -39,7 +39,6 @@ cd "$(dirname "$0")"
 echo "================================"
 echo "RUNNING YUBI-X TESTS"
 echo "`date`"
-echo "Thu Mar 14 13:43:36 CET 2013"
 echo "================================"
 
 pre=$(find pre.d -mindepth 1 -maxdepth 1 -type f -executable \
