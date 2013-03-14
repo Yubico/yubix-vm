@@ -58,7 +58,7 @@ done
 FAILED=""
 for test in $tests; do
 	echo "* Running test: $test"
-	if `$test`; then
+	if "$test"; then
 		echo "* Completed successfully!"
 	else
 		FAILED="true"
