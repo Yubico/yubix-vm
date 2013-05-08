@@ -42,13 +42,13 @@ if [ "x$1" == "x-d" ] || [ "x$1" == "x--dest" ]; then
 	shift
 fi
 
-VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual \
---mem 512 --tmpfs - --hostname yubix --user yubikey --pass yubico \
---copy $DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh \
---dest $DEST --templates $DIR/templates --verbose --ppa yubico/stable \
---addpkg linux-image-extra-virtual --addpkg unattended-upgrades \
---addpkg acpid --addpkg yubix --addpkg pwgen --addpkg ssh \
---addpkg bash-completion"
+VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual --mem 512 \
+	--tmpfs - --hostname yubix --user yubikey --pass yubico --copy \
+	$DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh --dest \
+	$DEST --templates $DIR/templates --verbose --ppa yubico/yubix --ppa \
+	yubico/stable --addpkg linux-image-extra-virtual --addpkg \
+	unattended-upgrades --addpkg acpid --addpkg yubix --addpkg pwgen \
+	--addpkg ssh --addpkg bash-completion"
 
 vmbuilder $HYPERVISOR $DIST $VMBUILDER_ARGS "$@"
 
