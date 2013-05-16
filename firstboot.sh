@@ -82,7 +82,3 @@ echo "python-yubiauth python-yubiauth/mysql/admin-pass password $ROOT_PASS" \
 dpkg-reconfigure yubikey-ksm -f noninteractive
 dpkg-reconfigure yubikey-val -f noninteractive
 dpkg-reconfigure python-yubiauth -f noninteractive
-
-# Prepare for initial web setup
-chown www-data:www-data -R /var/www/yubix
-rm /var/www/index.html
