@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+html {
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll;
+}
+
+label {
+	font-weight: bold;
+}
+
+a {
+	color: #8bc53f;
+}
+a:hover {
+	color: #6e9b30;
+}
+.nav-list>.active>a, .nav-list>.active>a:hover {
+	background-color: #8bc53f;
+}
+
+a.disabled, a.disabled:hover {
+	color: #999999;
+}
+
+.btn-primary {
+	background-color: #9edb48;
+	color: #ffffff;
+	background-image: -moz-linear-gradient(top, #9edb48, #628e25);
+	background-image: -ms-linear-gradient(top, #9edb48, #628e25);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9edb48), to(#628e25));
+	background-image: -webkit-linear-gradient(top, #9edb48, #628e25);
+	background-image: -o-linear-gradient(top, #9edb48, #628e25);
+	background-image: linear-gradient(top, #9edb48, #628e25);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'9edb48, endColorstr='#'628e25, GradientType=0);
+	border-color: #0044cc #0044cc #002a80;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+	background-color: #628e25;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+	background-color: #003399 \9;
+}
+
+.code {
+	font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
