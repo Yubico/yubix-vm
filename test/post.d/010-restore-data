@@ -33,9 +33,8 @@ set -e
 
 mysql ykksm < data-backup/ykksm.sql
 mysql ykval < data-backup/ykval.sql
+mysql yubiauth < data-backup/yubiauth.sql
 
-cp data-backup/users /etc/freeradius/users
-cp data-backup/ykrlm-config.cfg /etc/yubico/rlm/ykrlm-config.cfg 
-cp data-backup/ykmapping /etc/yubico/rlm/ykmapping
+cp data-backup/yubiauth.conf /etc/yubico/auth/yubiauth.conf
 
 rm data-backup -R

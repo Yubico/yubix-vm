@@ -32,6 +32,8 @@ set -e
 mysql ykksm < test-data/ykksm.sql
 mysql ykval < test-data/ykval.sql
 
-cp test-data/users /etc/freeradius/users
-cp test-data/ykrlm-config.cfg /etc/yubico/rlm/ykrlm-config.cfg
-cp test-data/ykmapping /etc/yubico/rlm/ykmapping
+curl http://localhost/yubiauth/core/users --data "username=user1&password=pass1"
+curl http://localhost/yubiauth/core/users --data "username=user2&password=pass2"
+
+cp test-data/yubiauth.conf /etc/yubico/auth/yubiauth.conf
+grep "^DATABASE_CONFIGURATION" data-backup/yubiauth.conf >> /etc/yubico/auth/yubiauth.conf

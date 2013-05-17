@@ -35,9 +35,9 @@ use Test::Exception;
 
 # user1 provisioned, user2 not. Auto-provisioning is off.
 # level 0
-`echo "user1:cccccccccccb" > /etc/yubico/rlm/ykmapping`;
-`echo "\\\$security_level = 0;" >> /etc/yubico/rlm/ykrlm-config.cfg`;
-`service freeradius restart`;
+`curl http://localhost/yubiauth/core/users/user1/yubikeys --data "yubikey=cccccccccccb"`;
+`echo "SECURITY_LEVEL = 0" >> /etc/yubico/auth/yubiauth.conf`;
+`service apache2 restart`;
 
 like(`radtest user1 pass1 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, '0: user1 has no OTP');
@@ -49,11 +49,11 @@ like(`radtest user1 pass1cccccccccccbrkcdnlnjglvhggvvthvtnjcbkcbgdnci 127.0.0.1 
 	qr/rad_recv: Access-Accept/, '0: user1 with OTP');
 
 # level 1
-`sed -i 's/security_level = 0/security_level = 1/g' /etc/yubico/rlm/ykrlm-config.cfg`;
-`service freeradius restart`;
+`echo "SECURITY_LEVEL = 1" >> /etc/yubico/auth/yubiauth.conf`;
+`service apache2 restart`;
 
 like(`radtest user1 pass1 127.0.0.1 0 testing123`,
-	qr/rad_recv: Access-Challenge/, '1: user1 has no OTP');
+	qr/rad_recv: Access-Reject/, '1: user1 has no OTP');
 
 like(`radtest user2 pass2 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, '1: user2 without OTP');
@@ -62,14 +62,14 @@ like(`radtest user1 pass1cccccccccccbvidrncnrueuvdjvcteghundndiuujukb 127.0.0.1 
 	qr/rad_recv: Access-Accept/, '1: user1 with OTP');
 
 # level 2
-`sed -i 's/security_level = 1/security_level = 2/g' /etc/yubico/rlm/ykrlm-config.cfg`;
-`service freeradius restart`;
+`echo "SECURITY_LEVEL = 2" >> /etc/yubico/auth/yubiauth.conf`;
+`service apache2 restart`;
 
 like(`radtest user1 pass1 127.0.0.1 0 testing123`,
-	qr/rad_recv: Access-Challenge/, '2: user1 has no OTP');
+	qr/rad_recv: Access-Reject/, '2: user1 has no OTP');
 
 like(`radtest user2 pass2 127.0.0.1 0 testing123`,
-	qr/rad_recv: Access-Challenge/, '2: user2 without OTP');
+	qr/rad_recv: Access-Reject/, '2: user2 without OTP');
 
 like(`radtest user1 pass1cccccccccccbidneikekrhhdenuhhrbculeultvecjbe 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, '2: user1 with OTP');

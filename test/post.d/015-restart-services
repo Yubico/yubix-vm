@@ -30,3 +30,4 @@
 set -e
 
 service freeradius restart
+service apache2 restart

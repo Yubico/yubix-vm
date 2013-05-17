@@ -27,25 +27,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Backup existing data. Everything backed up here should be restored
-# in 990-restore-data.
 set -e
 
-mkdir data-backup
+apt-get install -f curl libtest-exception-perl
 
-cp /etc/yubico/auth/yubiauth.conf data-backup/yubiauth.conf
-
-if ! mysqldump ykksm > data-backup/ykksm.sql; then
-	rm data-backup -Rf
-	exit 1
-fi
-
-if ! mysqldump ykval > data-backup/ykval.sql; then
-	rm data-backup -Rf
-	exit 1
-fi
-
-if ! mysqldump yubiauth > data-backup/yubiauth.sql; then
-	rm data-backup -Rf
-	exit 1
-fi

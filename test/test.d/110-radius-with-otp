@@ -58,8 +58,8 @@ like(`radtest user1 pass1 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'do not require OTP');
 
 #Disable auto provisioning
-`echo "\\\$allow_auto_provisioning = 0;" >> /etc/yubico/rlm/ykrlm-config.cfg`;
-`service freeradius restart`;
+`echo "AUTO_PROVISION = False" >> /etc/yubico/auth/yubiauth.conf`;
+`service apache2 restart`;
 
 like(`radtest user2 pass2 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'no OTP provisioned');
@@ -68,7 +68,7 @@ like(`radtest user2cccccccccccdevhrjfhjvivcldffttudhngrctjhlhuf pass2 127.0.0.1 
 	qr/rad_recv: Access-Reject/, 'unprovisioned OTP');
 
 #Manually provision:
-`echo "user2:cccccccccccd" >> /etc/yubico/rlm/ykmapping`;
+`curl http://localhost/yubiauth/core/users/user2/yubikeys --data "yubikey=cccccccccccd"`;
 
 like(`radtest user2cccccccccccdfhgrbtkeurfgjuiingirikvncejnktit pass2 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Accept/, 'manually provisioned OTP');
@@ -77,8 +77,12 @@ like(`radtest cccccccccccdlvigeledtrhnjfdibigjfcnhbilrfheb pass2 127.0.0.1 0 tes
 	qr/rad_recv: Access-Accept/, 'userless login');
 
 #Disable userless login:
-`echo "\\\$allow_userless_login = 0;" >> /etc/yubico/rlm/ykrlm-config.cfg`;
-`service freeradius restart`;
+`echo "YUBIKEY_IDENTIFICATION = False" >> /etc/yubico/auth/yubiauth.conf`;
+`service apache2 restart`;
 
 like(`radtest cccccccccccdiufijhvbfnlclvbtrjlduegcujfdikuf pass2 127.0.0.1 0 testing123`,
 	qr/rad_recv: Access-Reject/, 'disallowed userless login');
+
+#Cleanup
+`curl http://localhost/yubiauth/core/users/user1/yubikeys/cccccccccccb -X DELETE`;
+`curl http://localhost/yubiauth/core/users/user2/yubikeys/cccccccccccd -X DELETE`;
