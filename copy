@@ -1,2 +1,3 @@
 test/ /root/
-www/ /var/
+files/www/ /var/
+files/issue /etc/network/if-up.d/

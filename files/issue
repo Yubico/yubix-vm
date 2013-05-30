@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$METHOD" = loopback ]; then
+    exit 0
+fi
+
+# Only run from ifup.
+if [ "$MODE" != start ]; then
+    exit 0
+fi
+
+IP=$(/sbin/ifconfig | grep "inet addr" | grep -v "127.0.0.1" | awk '{ print $2 }' | awk -F: '{ print $2 }')
+
+if [ ! -f "/etc/issue.in" ]; then
+	# Set up the original copy
+	cp /etc/issue /etc/issue.in
+fi
+
+cp /etc/issue.in /etc/issue
+echo "IP: $IP" >> /etc/issue
+echo "" >> /etc/issue
