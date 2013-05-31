@@ -35,6 +35,9 @@
 
 set -e
 
+#Make sure we have the latest stuff
+DEBIAN_FRONTEND=noninteractive apt-get update && apt-get dist-upgrade -y || true
+
 # Regenerate SSH host keys.
 rm -f /etc/ssh/ssh_host*
 dpkg-reconfigure -fnoninteractive -pcritical openssh-server
@@ -82,6 +85,3 @@ echo "python-yubiauth python-yubiauth/mysql/admin-pass password $ROOT_PASS" \
 dpkg-reconfigure yubikey-ksm -f noninteractive
 dpkg-reconfigure yubikey-val -f noninteractive
 dpkg-reconfigure python-yubiauth -f noninteractive
-
-#Make sure we have the latest stuff
-apt-get update && apt-get dist-upgrade -y || true
