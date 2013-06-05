@@ -36,7 +36,9 @@
 set -e
 
 #Make sure we have the latest stuff
-DEBIAN_FRONTEND=noninteractive apt-get update && apt-get dist-upgrade -y || true
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y \
+	-o Dpkg::Options::="--force-confdef" \
+	-o Dpkg::Options::="--force-confold" || true
 
 # Regenerate SSH host keys.
 rm -f /etc/ssh/ssh_host*
