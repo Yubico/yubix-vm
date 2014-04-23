@@ -33,6 +33,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 HYPERVISOR="vmw6"
 DIST="ubuntu"
+SUITE="trusty"
 DEST="output"
 
 #Allow overriding dest
@@ -42,7 +43,7 @@ if [ "x$1" == "x-d" ] || [ "x$1" == "x--dest" ]; then
 	shift
 fi
 
-VMBUILDER_ARGS="--suite precise --arch i386 --flavour virtual --mem 512 \
+VMBUILDER_ARGS="--suite $SUITE --arch i386 --flavour virtual --mem 512 \
 	--tmpfs - --hostname yubix --user yubikey --pass yubico --copy \
 	$DIR/copy --exec $DIR/exec.sh --firstboot $DIR/firstboot.sh --dest \
 	$DEST --templates $DIR/templates --verbose --ppa yubico/yubix --ppa \
