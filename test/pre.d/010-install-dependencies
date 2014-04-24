@@ -29,5 +29,5 @@
 
 set -e
 
-apt-get update install -y curl libtest-exception-perl
+apt-get install -y curl libtest-exception-perl
 
