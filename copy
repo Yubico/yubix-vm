@@ -1,4 +1,4 @@
 test/ /root/
-files/www/ /var/
+files/html/ /var/www/
 files/issue /etc/network/if-up.d/
 files/update-fetch.sh /etc/cron.daily/
