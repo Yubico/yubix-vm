@@ -44,5 +44,5 @@ chroot $1 sed -i 's/^#*PasswordAuthentication .*$/PasswordAuthentication no/g' \
 chroot $1 rm -f /etc/ssh/ssh_host_*
 
 # Prepare for initial web setup
-chroot $1 chown www-data:www-data -R /var/www/yubix
+chroot $1 chown www-data:www-data -R /var/www/html/yubix
 chroot $1 rm -f /var/www/html/index.html

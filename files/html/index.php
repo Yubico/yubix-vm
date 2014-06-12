@@ -1,6 +1,6 @@
 <?php
 
-define('FILENAME', '/var/www/yubix/conf_done');
+define('FILENAME', '/var/www/html/yubix/conf_done');
 
 if(file_exists(FILENAME)) {
 	header("Location: http://".$_SERVER['SERVER_NAME'].":8080/");
