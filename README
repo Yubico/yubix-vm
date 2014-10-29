@@ -1,18 +1,13 @@
-YubiX VM
-=========
-
+== YubiX VM
 Creates a virtual machine with YubiX installed, ready for distribution.
 
-## Dependencies ##
-
+=== Dependencies
 VM images are created by using vmbuilder under Ubuntu. You will need a 
 Ubuntu installation with the python-vm-builder package installed.
 
-## Running ##
-
+=== Running
 To create the virtual machine image, run build-vm.sh as root.
 
-## Testing ##
-
+=== Testing
 To run the tests, run the /root/test/run-tests.sh script as the root user 
 on the virtual machine.

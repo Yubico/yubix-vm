@@ -1,0 +1,30 @@
+== Installation Using Virtual Machine Manager
+
+The Virtual Machine Manager (virt-manager) is a interface to load virtual machines, which works on GNU/Linux distributions like Debian, Ubuntu and RedHat.  This page contains instructions on how to import the YubiX virtual appliance into virt-manager.
+
+=== Download
+
+Download YubiX as usual, so you have a `YubiX-Virtual-Appliance-v*.zip` file somewhere.
+
+=== Unpack and convert
+
+You need to unpack the ZIP file and convert it into a format that virt-manager can understand.
+
+[source, sh]
+----
+jas@latte:~$ unzip Hämtningar/YubiX-Virtual-Appliance-v0.2.zip 
+Archive:  Hämtningar/YubiX-Virtual-Appliance-v0.2.zip
+   creating: YubiX-Virtual-Appliance-v0.2/
+  inflating: YubiX-Virtual-Appliance-v0.2/YubiX-Virtual-Appliance-v0.2.vmdk  
+  inflating: YubiX-Virtual-Appliance-v0.2/YubiX-Virtual-Appliance-v0.2.vmx  
+jas@latte:~$ cd YubiX-Virtual-Appliance-v0.2/
+jas@latte:~/YubiX-Virtual-Appliance-v0.2$ virt-convert --arch=i686 --os-type=linux YubiX-Virtual-Appliance-v0.2.vmx 
+Generating output in 'virt-image' format to YubiX-Virtual-Appliance-v0.2/
+Converting disk 'YubiX-Virtual-Appliance-v0.2.vmdk' to type raw...
+Done.
+jas@latte:~/YubiX-Virtual-Appliance-v0.2$ 
+----
+
+=== Import
+
+Start virt-manager and right-click on your virtual host, select 'New', enter a name for your virtual machine (e.g., 'yubix-vm') and select 'Import existing disk image', and click on Forward.  On the next screen, select your the *.raw image file generated above (using 'Browse Local' to find the image) and then click Forward again.  Click Forward repeatedly and Finish, modifying any other configuration as you wish.  The machine should then start and you will see a console window appearing.
