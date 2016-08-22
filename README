@@ -11,3 +11,17 @@ To create the virtual machine image, run build-vm.sh as root.
 === Testing
 To run the tests, run the /root/test/run-tests.sh script as the root user 
 on the virtual machine.
+
+
+=== Race condition in vmbuilder
+There is a known issue in vmbuilder which sometimes fails the build, printing an error: "/dev/mapper/loop0p1 does not exist".
+To fix this you will need to make a modification int the following file: /usr/lib/python2.7/dist-packages/VMBuilder/disk.py (location may vary).
+Find the map_partitions method and change the following row:
+
+  kpartx_output = run_cmd('kpartx', '-av', self.filename)
+
+to the following (note the added 's' in the arguments):
+
+  kpartx_output = run_cmd('kpartx', '-sav', self.filename)
+
+Now, the build should succeed.
