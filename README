@@ -1,4 +1,7 @@
 == YubiX VM
+
+NOTE: This project is deprecated and is no longer being maintained.
+
 Creates a virtual machine with YubiX installed, ready for distribution.
 
 === Dependencies
